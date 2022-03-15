@@ -89,8 +89,6 @@ export function calculateResults({
       }
     }
 
-    console.log("AFTER SIMULATION: currentCapital =", currentCapital);
-
     // total tax on interest
     if (interest.enabled) {
       totalInterestTaxY =
@@ -111,7 +109,6 @@ export function calculateResults({
     endingCapital = currentCapital;
 
     let compoundedRate = (Math.pow(1 + inflationPercentage / 100, y) - 1) * 100;
-    console.log({ compoundedRate, inflationPercentage });
 
     inflationAdjustedEndingCapital = endingCapital / (1 + compoundedRate / 100);
 

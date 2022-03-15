@@ -91,9 +91,9 @@
     input.periodicContribution.type = input.periodicContribution.type.key;
     input.periodicContribution.period = input.periodicContribution.period.key;
 
-    console.log("INPUT", input);
+    console.debug("INPUT", input);
     results = calculateResults(input);
-    console.log("RESULTS", results);
+    console.debug("RESULTS", results);
   }
 </script>
 
