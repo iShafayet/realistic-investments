@@ -8,6 +8,7 @@
   import Switch from "@smui/switch";
   import Select, { Option } from "@smui/select";
 
+  import Output from "./Output.svelte";
   import { calculateResults } from "./calculations";
 
   const interestTypeList = [
@@ -46,7 +47,7 @@
 
   let years = 10;
 
-  let capitalAmount = 1_00_000;
+  let capitalAmount = 100_000;
 
   let inflationPercentage = 5.86;
 
@@ -58,18 +59,20 @@
   };
 
   let interest = {
-    enabled: false,
+    enabled: true,
     type: interestTypeList.find((x) => x.key === "compounding"),
     period: interestPeriodList.find((x) => x.key === "yearly-1-y"),
     percentage: 9,
-    taxPercentageOnInterest: 0,
+    taxPercentageOnInterest: 5,
   };
 
   let wealthTax = {
-    enabled: false,
+    enabled: true,
     percentage: 2.5,
     excludeWealthYoungerThanOneYear: true,
   };
+
+  let results = null;
 
   function calculateClicked() {
     let input = {
@@ -89,7 +92,7 @@
     input.periodicContribution.period = input.periodicContribution.period.key;
 
     console.log("INPUT", input);
-    let results = calculateResults(input);
+    results = calculateResults(input);
     console.log("RESULTS", results);
   }
 </script>
@@ -108,15 +111,15 @@
     </Textfield>
 
     <Textfield
-    bind:value={years}
-    label="Duration (years)"
-    class="textfield"
-    type="number"
-  >
-    <HelperText slot="helper">
-      For how long do you want to simulate?
-    </HelperText>
-  </Textfield>
+      bind:value={years}
+      label="Duration (years)"
+      class="textfield"
+      type="number"
+    >
+      <HelperText slot="helper">
+        For how long do you want to simulate?
+      </HelperText>
+    </Textfield>
 
     <Textfield
       bind:value={inflationPercentage}
@@ -249,6 +252,8 @@
   <Button on:click={calculateClicked} variant="raised">
     <Label>Calculate</Label>
   </Button>
+
+  <Output class="output" data={results} />
 </div>
 
 <style>
@@ -262,6 +267,11 @@
   .calculation-container :global(.card) {
     width: 100%;
     max-width: 400px;
+    margin-bottom: 20px;
+  }
+
+  .calculation-container :global(.output) {
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 </style>

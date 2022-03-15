@@ -116,7 +116,7 @@ export function calculateResults({
     inflationAdjustedEndingCapital = endingCapital / (1 + compoundedRate / 100);
 
     list.push({
-      year: 1,
+      year: y,
       startingCapital,
       totalInterestY,
       totalContributionY,
