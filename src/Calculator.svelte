@@ -51,6 +51,8 @@
 
   let inflationPercentage = 5.86;
 
+  let showAdvancedControls = false;
+
   let periodicContribution = {
     enabled: false,
     type: contributionTypeList.find((x) => x.key === "deposit"),
@@ -118,18 +120,6 @@
     >
       <HelperText slot="helper">
         For how long do you want to simulate?
-      </HelperText>
-    </Textfield>
-
-    <Textfield
-      bind:value={inflationPercentage}
-      label="Inflation percentage"
-      class="textfield"
-      type="number"
-      step="0.01"
-    >
-      <HelperText slot="helper">
-        Put in the annual inflation rate for your country/currency.
       </HelperText>
     </Textfield>
   </Card>
@@ -246,6 +236,27 @@
         <Checkbox bind:checked={wealthTax.excludeWealthYoungerThanOneYear} />
         <span slot="label">Exclude wealth younger than one year.</span>
       </FormField>
+    {/if}
+  </Card>
+
+  <Card class="card wealth-tax-card" padded>
+    <FormField align="end">
+      <Switch bind:checked={showAdvancedControls} />
+      <span slot="label">Show advanced controls</span>
+    </FormField>
+
+    {#if showAdvancedControls}
+      <Textfield
+        bind:value={inflationPercentage}
+        label="Inflation percentage"
+        class="textfield"
+        type="number"
+        step="0.01"
+      >
+        <HelperText slot="helper">
+          Put in the annual inflation rate for your country/currency.
+        </HelperText>
+      </Textfield>
     {/if}
   </Card>
 
