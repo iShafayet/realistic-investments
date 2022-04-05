@@ -30,7 +30,6 @@
     <DataTable
       class="data-table"
       table$aria-label="Calculation results"
-      style="max-width: 100%;"
     >
       <Head>
         <Row>
@@ -65,6 +64,15 @@
 </div>
 
 <style>
+  .output {
+    max-width: 100vw;
+  }
+
+  .output :global(.mdc-data-table) {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: calc(100% - 20px);
+  }
   .output :global(.mdc-data-table__header-cell) {
     font-weight: bold;
   }
