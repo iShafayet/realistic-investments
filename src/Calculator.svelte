@@ -35,7 +35,7 @@
 
 <style>
   .calculation-container {
-    margin-top: 40px;
+    margin-top: 00px;
     display: flex;
     flex-direction: column;
     align-items: center;

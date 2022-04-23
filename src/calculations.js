@@ -124,5 +124,28 @@ export function calculateResults({
     });
   }
 
-  return list;
+  // totals
+  let totals = {
+    investment:
+      capitalAmount +
+      list.reduce((sum, year) => sum + Math.max(year.totalContributionY, 0), 0),
+    withdrawl: list.reduce(
+      (sum, year) => sum + Math.min(year.totalContributionY, 0),
+      0
+    ),
+    periodicContributionOrWithdrawl: list.reduce(
+      (sum, year) => sum + year.totalContributionY,
+      0
+    ),
+    interest: list.reduce((sum, year) => sum + year.totalInterestY, 0),
+    interestTax: list.reduce((sum, year) => sum + year.totalInterestTaxY, 0),
+    wealthTax: list.reduce((sum, year) => sum + year.totalWealthTaxY, 0),
+    years,
+    endingCapital: list[list.length-1].endingCapital,
+    inflationAdjustedEndingCapital: list[list.length-1].inflationAdjustedEndingCapital,
+  };
+
+  console.log(totals);
+
+  return { list, totals };
 }
