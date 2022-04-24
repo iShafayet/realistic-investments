@@ -2,9 +2,10 @@
   import DataTable, { Head, Body, Row, Cell } from "@smui/data-table";
 
   export let data = undefined;
+  export let currency = undefined;
 
   const internationalNumberFormat = new Intl.NumberFormat("en-US", {
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   });
 
   function inspect(data) {
@@ -12,7 +13,11 @@
   }
 
   function gentrify(number) {
-    return internationalNumberFormat.format(Math.round(number * 100) / 100);
+    return (
+      currency +
+      "" +
+      internationalNumberFormat.format(Math.round(number * 100) / 100)
+    );
   }
 
   let outputDivEl;

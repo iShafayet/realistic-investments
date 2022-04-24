@@ -8,20 +8,54 @@
   import Select, { Option } from "@smui/select";
 
   import { fixtures } from "./fixtures";
+  import { currencyList } from "./currency-list";
 
+  export let notifyChange = undefined;
   export let inputData = undefined;
+  export let currency = undefined;
+
   let showAdvancedControls = false;
 
   let inputDivEl;
+
+  let currencySelectedItem = currencyList.find((c) => c.key === "USD");
+
+  function onInputChange(inputData) {
+    if (notifyChange) {
+      notifyChange();
+    }
+  }
+
+  function onCurrencyChange(currencySelectedItem) {
+    if (currencySelectedItem) {
+      currency = currencySelectedItem.sign;
+    }
+  }
+
+  $: {
+    onCurrencyChange(currencySelectedItem);
+    onInputChange(inputData);
+  }
 </script>
 
 <div class="input-container" bind:this={inputDivEl}>
   <Card class="card essential-card" padded>
+    <Select
+      bind:value={currencySelectedItem}
+      key={(currency) => `${(currency && currency.key) || ""}`}
+      label="Currency"
+    >
+      {#each currencyList as currency (currency.label)}
+        <Option value={currency}>{currency.label} ({currency.sign})</Option>
+      {/each}
+    </Select>
+
     <Textfield
       bind:value={inputData.capitalAmount}
       label="Capital amount"
       class="textfield"
       type="number"
+      input$min="0"
     >
       <HelperText persistent slot="helper">
         Enter how much money are you initially investing.
@@ -33,6 +67,7 @@
       label="Investment duration (years)"
       class="textfield"
       type="number"
+      input$min="1"
     >
       <HelperText persistent slot="helper">
         For how long do you want to project?
@@ -74,6 +109,7 @@
         label="Amount"
         class="textfield"
         type="number"
+        input$min="0"
       >
         <HelperText persistent slot="helper">
           The amount of contribution/deposit or withdrawal.
@@ -115,6 +151,8 @@
         label="Yearly rate (%)"
         class="textfield"
         type="number"
+        input$step={0.01}
+        input$min="0"
       >
         <HelperText persistent slot="helper">
           The yearly rate of interest / projected profit.
@@ -126,6 +164,8 @@
         label="Tax on above profit/interest income (%)"
         class="textfield"
         type="number"
+        input$step={0.01}
+        input$min="0"
       >
         <HelperText persistent slot="helper"
           >Set to 0 if not applicable.</HelperText
@@ -146,6 +186,8 @@
         label="Rate (%)"
         class="textfield"
         type="number"
+        input$step={0.01}
+        input$min="0"
       >
         <HelperText persistent slot="helper"
           >Yearly wealth-tax/zaqat percentage (regarding this investment).</HelperText
@@ -173,7 +215,8 @@
         label="Annual Inflation Rate (%)"
         class="textfield"
         type="number"
-        step="0.01"
+        input$step={0.01}
+        input$min="0"
       >
         <HelperText persistent slot="helper">
           Put in the annual inflation rate for your country/currency.

@@ -141,11 +141,10 @@ export function calculateResults({
     interestTax: list.reduce((sum, year) => sum + year.totalInterestTaxY, 0),
     wealthTax: list.reduce((sum, year) => sum + year.totalWealthTaxY, 0),
     years,
-    endingCapital: list[list.length-1].endingCapital,
-    inflationAdjustedEndingCapital: list[list.length-1].inflationAdjustedEndingCapital,
+    endingCapital: list[list.length - 1].endingCapital,
+    inflationAdjustedEndingCapital:
+      list[list.length - 1].inflationAdjustedEndingCapital,
   };
-
-  console.log(totals);
 
   return { list, totals };
 }

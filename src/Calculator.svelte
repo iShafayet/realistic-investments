@@ -5,9 +5,16 @@
   import InputDiv from "./Input.svelte";
   import { calculateResults } from "./calculations";
   import { fixtures } from "./fixtures";
-  import { inputData } from "./input-fixture";
+  import { inputDataFixture } from "./input-fixture";
+
+  let { inputData } = inputDataFixture;
 
   let results = null;
+  let currency = "$";
+
+  function notifyChange() {
+    results = null;
+  }
 
   function calculateClicked() {
     let input = JSON.parse(JSON.stringify(inputData));
@@ -24,13 +31,13 @@
 </script>
 
 <div class="calculation-container">
-  <InputDiv class="input" {inputData} />
+  <InputDiv class="input" {inputData} {notifyChange} bind:currency />
 
   <Button on:click={calculateClicked} variant="raised">
     <Label>Calculate</Label>
   </Button>
 
-  <Output class="output" data={results} />
+  <Output class="output" data={results} bind:currency />
 </div>
 
 <style>
