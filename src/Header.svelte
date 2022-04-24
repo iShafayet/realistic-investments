@@ -16,7 +16,7 @@
       <li>Taxes on your profit</li>
       <li>Periodic deposit (like a savings scheme/recurring investment)</li>
       <li>Periodic withdrawal (i.e. living off of profit)</li>
-      <li>Your country's inflation rate.</li>
+      <li>Your country's inflation rate</li>
     </ul>
 
     <p style="font-style: italic;">
