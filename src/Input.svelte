@@ -29,6 +29,8 @@
   function onCurrencyChange(currencySelectedItem) {
     if (currencySelectedItem) {
       currency = currencySelectedItem.sign;
+      inputData.suggestedPriceOfGoldPerGram =
+        currencySelectedItem.defaultSuggestedPriceOfGoldPerGram;
     }
   }
 
@@ -220,6 +222,19 @@
       >
         <HelperText persistent slot="helper">
           Put in the annual inflation rate for your country/currency.
+        </HelperText>
+      </Textfield>
+
+      <Textfield
+        bind:value={inputData.suggestedPriceOfGoldPerGram}
+        label="Price of Gold per Gram"
+        class="textfield"
+        type="number"
+        input$step={0.01}
+        input$min="0"
+      >
+        <HelperText persistent slot="helper">
+          For calculating the examples.
         </HelperText>
       </Textfield>
     {/if}

@@ -20,6 +20,10 @@
     );
   }
 
+  function gramify(number) {
+    return internationalNumberFormat.format(Math.round(number * 100) / 100);
+  }
+
   let outputDivEl;
   $: {
     if (data) {
@@ -40,14 +44,46 @@
       With a total investment of <span class="highlight"
         >{gentrify(data.totals.investment)}</span
       >, after
-      <span class="highlight">{data.totals.years}</span>
-      years, your total will be
+      <span class="highlight">{data.totals.years} years</span>
+      , your total will be
       <span class="highlight">{gentrify(data.totals.endingCapital)}</span>.
       However, taking inflation into account, in today's money, that will be
       equivalent to
       <span class="highlight"
         >{gentrify(data.totals.inflationAdjustedEndingCapital)}</span
       >.
+      <br />
+      <br />
+      To summarize,
+      {#if data.totals.effectiveInflationAdjustedProfit > 0}
+        you will make effectively <span class="highlight"
+          >{gentrify(data.totals.effectiveInflationAdjustedProfit)}</span
+        >
+        in profit,
+      {:else}
+        you will be effectively loosing <span class="highlight"
+          >{gentrify(
+            Math.abs(data.totals.effectiveInflationAdjustedProfit)
+          )}</span
+        >,
+      {/if}
+      after adjusting for inflation.
+      <br />
+      <br />
+      For example, if you could purchase
+      <span class="highlight"
+        >{gramify(data.example.goldPurchaseableWithStartingCapital)}
+        grams
+      </span>
+      of gold today with your total investment, after
+      <span class="highlight">{data.totals.years} years</span>, you will be able
+      to purchase
+      <span class="highlight"
+        >{gramify(
+          data.example.goldPurchaseableWithInflationAdjustedEndingCapital
+        )}
+        grams
+      </span> of gold with your ending capital.
     </div>
 
     <div class="section-title">Detailed breakdown</div>

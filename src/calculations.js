@@ -5,6 +5,7 @@ export function calculateResults({
   interest,
   wealthTax,
   years,
+  suggestedPriceOfGoldPerGram,
 }) {
   // normalize
   if (interest.enabled && interest.period === "monthly-12-y") {
@@ -145,6 +146,18 @@ export function calculateResults({
     inflationAdjustedEndingCapital:
       list[list.length - 1].inflationAdjustedEndingCapital,
   };
+  totals.effectiveInflationAdjustedProfit = totals.inflationAdjustedEndingCapital - totals.investment;
 
-  return { list, totals };
+  // example
+  if (suggestedPriceOfGoldPerGram <= 0) {
+    suggestedPriceOfGoldPerGram = 0.00000001;
+  }
+  let example = {
+    goldPurchaseableWithStartingCapital:
+      totals.investment / suggestedPriceOfGoldPerGram,
+    goldPurchaseableWithInflationAdjustedEndingCapital:
+      totals.inflationAdjustedEndingCapital / suggestedPriceOfGoldPerGram,
+  };
+
+  return { list, totals, example };
 }

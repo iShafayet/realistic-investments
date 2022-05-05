@@ -27,5 +27,6 @@ export const inputDataFixture = {
       excludeWealthYoungerThanOneYear: true,
     },
     inflationPercentage: 5.86,
+    suggestedPriceOfGoldPerGram: 100
   },
 };
