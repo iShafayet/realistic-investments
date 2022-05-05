@@ -5,6 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "start:dev": "sirv public --host --dev",
     "start": "sirv public --no-clear"
   },
   "devDependencies": {
