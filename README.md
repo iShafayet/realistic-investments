@@ -18,17 +18,17 @@ Get thorough profit/depreciation calculation of investments and savings that tak
 
 This service is available at [https://ishafayet.github.io/realistic-investments](https://ishafayet.github.io/realistic-investments)
 
-## For developers (prepare environment)
+## For developers
 
-```bash
-npm i
-```
+We don't recommend running it directly on your development machine. Use the following instruction to run it in a virtual server instance.
 
-## For developers (to run)
+1. Get [Vagrant](https://www.vagrantup.com/) and [Oracle VirtualBox](https://www.virtualbox.org/)
+2. Inside this repository, run `vagrant up`. (On windows, run as admin)
+3. Run `vagrant ssh`
+4. Run `cd realistic-investments`
+5. Run `npm run dev`
+6. The default server URL is [`http://192.168.33.102:8080`](http://192.168.33.102:8080)
 
-```bash
-npm run dev
-```
 
 ## Author and License
 
