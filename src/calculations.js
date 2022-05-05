@@ -1,15 +1,23 @@
-export function calculateResults({
-  capitalAmount,
-  inflationPercentage,
-  periodicContribution,
-  interest,
-  wealthTax,
-  years,
-  suggestedPriceOfGoldPerGram,
-}) {
+export function calculateResults(input) {
+  let {
+    capitalAmount,
+    inflationPercentage,
+    periodicContribution,
+    interest,
+    wealthTax,
+    years,
+    suggestedPriceOfGoldPerGram,
+  } = input;
+
   // normalize
   if (interest.enabled && interest.period === "monthly-12-y") {
     interest.percentage = interest.percentage / 12;
+  }
+
+  // normalize
+  input.interestType = "none";
+  if (interest.enabled) {
+    input.interestType = interest.type;
   }
 
   let list = [];
@@ -94,7 +102,11 @@ export function calculateResults({
     if (interest.enabled) {
       totalInterestTaxY =
         totalInterestY * (interest.taxPercentageOnInterest / 100);
-      currentCapital -= totalInterestTaxY;
+      // simple interest is not counted towards the recurring investments. Thereby
+      // the tax on interest in not deducted from the capital.
+      if (interest.type === "compounding") {
+        currentCapital -= totalInterestTaxY;
+      }
     }
 
     // yearly wealth tax
@@ -113,13 +125,17 @@ export function calculateResults({
 
     inflationAdjustedEndingCapital = endingCapital / (1 + compoundedRate / 100);
 
+    let inflationAdjustedTotalInterestAfterIncomeTaxY =
+      (totalInterestY - totalInterestTaxY) / (1 + compoundedRate / 100);
+
     list.push({
       year: y,
       startingCapital,
       totalInterestY,
       totalContributionY,
-      totalWealthTaxY,
       totalInterestTaxY,
+      inflationAdjustedTotalInterestAfterIncomeTaxY,
+      totalWealthTaxY,
       endingCapital,
       inflationAdjustedEndingCapital,
     });
@@ -139,6 +155,10 @@ export function calculateResults({
       0
     ),
     interest: list.reduce((sum, year) => sum + year.totalInterestY, 0),
+    inflationAdjustedTotalInterestAfterIncomeTax: list.reduce(
+      (sum, year) => sum + year.inflationAdjustedTotalInterestAfterIncomeTaxY,
+      0
+    ),
     interestTax: list.reduce((sum, year) => sum + year.totalInterestTaxY, 0),
     wealthTax: list.reduce((sum, year) => sum + year.totalWealthTaxY, 0),
     years,
@@ -146,7 +166,8 @@ export function calculateResults({
     inflationAdjustedEndingCapital:
       list[list.length - 1].inflationAdjustedEndingCapital,
   };
-  totals.effectiveInflationAdjustedProfit = totals.inflationAdjustedEndingCapital - totals.investment;
+  totals.effectiveInflationAdjustedProfit =
+    totals.inflationAdjustedEndingCapital - totals.investment;
 
   // example
   if (suggestedPriceOfGoldPerGram <= 0) {
@@ -159,5 +180,5 @@ export function calculateResults({
       totals.inflationAdjustedEndingCapital / suggestedPriceOfGoldPerGram,
   };
 
-  return { list, totals, example };
+  return { input, list, totals, example };
 }

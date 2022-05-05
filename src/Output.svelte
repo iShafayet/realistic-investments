@@ -54,6 +54,7 @@
       >.
       <br />
       <br />
+
       To summarize,
       {#if data.totals.effectiveInflationAdjustedProfit > 0}
         you will make effectively <span class="highlight"
@@ -70,6 +71,7 @@
       after adjusting for inflation.
       <br />
       <br />
+
       For example, if you could purchase
       <span class="highlight"
         >{gramify(data.example.goldPurchaseableWithStartingCapital)}
@@ -83,7 +85,22 @@
           data.example.goldPurchaseableWithInflationAdjustedEndingCapital
         )}
         grams
-      </span> of gold with your ending capital.
+      </span>
+      of gold with your ending capital.
+
+      {#if data.input.interestType === "simple"}
+        <br />
+        <br />
+        During this period, you will make
+        <span class="highlight">{gentrify(data.totals.interest)}</span>
+        as profit/interest. However, you're not re-investing this amount. After adjusting
+        for inflation, your total interest (after income tax) would be equal to
+        <span class="highlight"
+          >{gentrify(
+            data.totals.inflationAdjustedTotalInterestAfterIncomeTax
+          )}</span
+        >.
+      {/if}
     </div>
 
     <div class="section-title">Detailed breakdown</div>

@@ -30,7 +30,9 @@
     if (currencySelectedItem) {
       currency = currencySelectedItem.sign;
       inputData.suggestedPriceOfGoldPerGram =
-        currencySelectedItem.defaultSuggestedPriceOfGoldPerGram;
+        Math.round(
+          currencySelectedItem.defaultSuggestedPriceOfGoldPerGram * 100
+        ) / 100;
     }
   }
 
