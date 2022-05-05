@@ -2,13 +2,12 @@
 <div class="container">
   <div style="max-width: 600px;">
     <p>
-      Get thorough profit/depreciation calculation of investments and savings
-      that takes inflation, taxes, and wealth taxes into account.
+      Get thorough profit/depreciation calculation of investments and savings that takes inflation, taxes, and wealth
+      taxes into account.
     </p>
 
     <p>
-      Simply fill up an easy, self-explanatory form and get projections
-      instantly. The algorithm can take into account -
+      Simply fill up an easy, self-explanatory form and get projections instantly. The algorithm can take into account -
     </p>
     <ul>
       <li>Your capital</li>
@@ -20,8 +19,8 @@
     </ul>
 
     <p style="font-style: italic;">
-      Disclaimer: All the calculations are done on your browser. No data is
-      transmitted to our servers. Your information is yours alone.
+      Disclaimer: All the calculations are done on your browser. No data is transmitted to our servers. Your information
+      is yours alone.
     </p>
 
     <p>Let's get started...</p>

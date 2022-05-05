@@ -13,11 +13,7 @@
   }
 
   function gentrify(number) {
-    return (
-      currency +
-      "" +
-      internationalNumberFormat.format(Math.round(number * 100) / 100)
-    );
+    return currency + "" + internationalNumberFormat.format(Math.round(number * 100) / 100);
   }
 
   function gramify(number) {
@@ -41,31 +37,23 @@
     <div class="section-title">Your projections</div>
 
     <div class="summary">
-      With a total investment of <span class="highlight"
-        >{gentrify(data.totals.investment)}</span
-      >, after
+      With a total investment of <span class="highlight">{gentrify(data.totals.investment)}</span>, after
       <span class="highlight">{data.totals.years} years</span>
       , your total will be
-      <span class="highlight">{gentrify(data.totals.endingCapital)}</span>.
-      However, taking inflation into account, in today's money, that will be
-      equivalent to
-      <span class="highlight"
-        >{gentrify(data.totals.inflationAdjustedEndingCapital)}</span
-      >.
+      <span class="highlight">{gentrify(data.totals.endingCapital)}</span>. However, taking inflation into account, in
+      today's money, that will be equivalent to
+      <span class="highlight">{gentrify(data.totals.inflationAdjustedEndingCapital)}</span>.
       <br />
       <br />
 
       To summarize,
       {#if data.totals.effectiveInflationAdjustedProfit > 0}
-        you will make effectively <span class="highlight"
-          >{gentrify(data.totals.effectiveInflationAdjustedProfit)}</span
+        you will make effectively <span class="highlight">{gentrify(data.totals.effectiveInflationAdjustedProfit)}</span
         >
         in profit,
       {:else}
         you will be effectively loosing <span class="highlight"
-          >{gentrify(
-            Math.abs(data.totals.effectiveInflationAdjustedProfit)
-          )}</span
+          >{gentrify(Math.abs(data.totals.effectiveInflationAdjustedProfit))}</span
         >,
       {/if}
       after adjusting for inflation.
@@ -78,12 +66,9 @@
         grams
       </span>
       of gold today with your total investment, after
-      <span class="highlight">{data.totals.years} years</span>, you will be able
-      to purchase
+      <span class="highlight">{data.totals.years} years</span>, you will be able to purchase
       <span class="highlight"
-        >{gramify(
-          data.example.goldPurchaseableWithInflationAdjustedEndingCapital
-        )}
+        >{gramify(data.example.goldPurchaseableWithInflationAdjustedEndingCapital)}
         grams
       </span>
       of gold with your ending capital.
@@ -93,13 +78,9 @@
         <br />
         During this period, you will make
         <span class="highlight">{gentrify(data.totals.interest)}</span>
-        as profit/interest. However, you're not re-investing this amount. After adjusting
-        for inflation, your total interest (after income tax) would be equal to
-        <span class="highlight"
-          >{gentrify(
-            data.totals.inflationAdjustedTotalInterestAfterIncomeTax
-          )}</span
-        >.
+        as profit/interest. However, you're not re-investing this amount. After adjusting for inflation, your total interest
+        (after income tax) would be equal to
+        <span class="highlight">{gentrify(data.totals.inflationAdjustedTotalInterestAfterIncomeTax)}</span>.
       {/if}
     </div>
 
@@ -144,9 +125,7 @@
             </Cell>
             <Cell numeric>
               {#if i == data.list.length - 1}
-                <span class="bold"
-                  >{gentrify(dataRow.inflationAdjustedEndingCapital)}</span
-                >
+                <span class="bold">{gentrify(dataRow.inflationAdjustedEndingCapital)}</span>
               {/if}
               {#if i != data.list.length - 1}
                 {gentrify(dataRow.inflationAdjustedEndingCapital)}

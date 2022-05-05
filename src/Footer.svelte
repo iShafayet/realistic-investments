@@ -4,16 +4,11 @@
 
     <p style="text-align: center;">
       This is a completely free and opersource project. The
-      <a
-        href="https://github.com/iShafayet/realistic-investments"
-        target="_blank">source code</a
-      >
+      <a href="https://github.com/iShafayet/realistic-investments" target="_blank">source code</a>
       is under the MIT License.
       <br />
       2022 ©
-      <a href="https://github.com/iShafayet" target="_blank" style=""
-        >Sayem Shafayet</a
-      >
+      <a href="https://github.com/iShafayet" target="_blank" style="">Sayem Shafayet</a>
     </p>
   </div>
 </div>

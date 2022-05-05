@@ -8,9 +8,7 @@ export const inputDataFixture = {
     periodicContribution: {
       enabled: false,
       type: fixtures.contributionTypeList.find((x) => x.key === "deposit"),
-      period: fixtures.contributionPeriodList.find(
-        (x) => x.key === "monthly-12-y"
-      ),
+      period: fixtures.contributionPeriodList.find((x) => x.key === "monthly-12-y"),
       amount: 0,
     },
     interest: {
@@ -27,6 +25,6 @@ export const inputDataFixture = {
       excludeWealthYoungerThanOneYear: true,
     },
     inflationPercentage: 5.86,
-    suggestedPriceOfGoldPerGram: 100
+    suggestedPriceOfGoldPerGram: 100,
   },
 };

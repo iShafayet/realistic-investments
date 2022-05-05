@@ -30,9 +30,7 @@
     if (currencySelectedItem) {
       currency = currencySelectedItem.sign;
       inputData.suggestedPriceOfGoldPerGram =
-        Math.round(
-          currencySelectedItem.defaultSuggestedPriceOfGoldPerGram * 100
-        ) / 100;
+        Math.round(currencySelectedItem.defaultSuggestedPriceOfGoldPerGram * 100) / 100;
     }
   }
 
@@ -61,9 +59,7 @@
       type="number"
       input$min="0"
     >
-      <HelperText persistent slot="helper">
-        Enter how much money are you initially investing.
-      </HelperText>
+      <HelperText persistent slot="helper">Enter how much money are you initially investing.</HelperText>
     </Textfield>
 
     <Textfield
@@ -73,9 +69,7 @@
       type="number"
       input$min="1"
     >
-      <HelperText persistent slot="helper">
-        For how long do you want to project?
-      </HelperText>
+      <HelperText persistent slot="helper">For how long do you want to project?</HelperText>
     </Textfield>
   </Card>
 
@@ -88,8 +82,7 @@
     {#if inputData.periodicContribution.enabled}
       <Select
         bind:value={inputData.periodicContribution.type}
-        key={(contributionType) =>
-          `${(contributionType && contributionType.key) || ""}`}
+        key={(contributionType) => `${(contributionType && contributionType.key) || ""}`}
         label="Type"
       >
         {#each fixtures.contributionTypeList as contributionType (contributionType.label)}
@@ -99,8 +92,7 @@
 
       <Select
         bind:value={inputData.periodicContribution.period}
-        key={(contributionPeriod) =>
-          `${(contributionPeriod && contributionPeriod.key) || ""}`}
+        key={(contributionPeriod) => `${(contributionPeriod && contributionPeriod.key) || ""}`}
         label="Period / Frequency"
       >
         {#each fixtures.contributionPeriodList as contributionPeriod (contributionPeriod.label)}
@@ -115,9 +107,7 @@
         type="number"
         input$min="0"
       >
-        <HelperText persistent slot="helper">
-          The amount of contribution/deposit or withdrawal.
-        </HelperText>
+        <HelperText persistent slot="helper">The amount of contribution/deposit or withdrawal.</HelperText>
       </Textfield>
     {/if}
   </Card>
@@ -141,8 +131,7 @@
 
       <Select
         bind:value={inputData.interest.period}
-        key={(interestPeriod) =>
-          `${(interestPeriod && interestPeriod.key) || ""}`}
+        key={(interestPeriod) => `${(interestPeriod && interestPeriod.key) || ""}`}
         label="Period / Frequency"
       >
         {#each fixtures.interestPeriodList as interestPeriod (interestPeriod.label)}
@@ -158,9 +147,7 @@
         input$step={0.01}
         input$min="0"
       >
-        <HelperText persistent slot="helper">
-          The yearly rate of interest / projected profit.
-        </HelperText>
+        <HelperText persistent slot="helper">The yearly rate of interest / projected profit.</HelperText>
       </Textfield>
 
       <Textfield
@@ -171,9 +158,7 @@
         input$step={0.01}
         input$min="0"
       >
-        <HelperText persistent slot="helper"
-          >Set to 0 if not applicable.</HelperText
-        >
+        <HelperText persistent slot="helper">Set to 0 if not applicable.</HelperText>
       </Textfield>
     {/if}
   </Card>
@@ -193,15 +178,12 @@
         input$step={0.01}
         input$min="0"
       >
-        <HelperText persistent slot="helper"
-          >Yearly wealth-tax/zaqat percentage (regarding this investment).</HelperText
+        <HelperText persistent slot="helper">Yearly wealth-tax/zaqat percentage (regarding this investment).</HelperText
         >
       </Textfield>
 
       <FormField>
-        <Checkbox
-          bind:checked={inputData.wealthTax.excludeWealthYoungerThanOneYear}
-        />
+        <Checkbox bind:checked={inputData.wealthTax.excludeWealthYoungerThanOneYear} />
         <span slot="label">Exclude wealth younger than one year.</span>
       </FormField>
     {/if}
@@ -222,9 +204,7 @@
         input$step={0.01}
         input$min="0"
       >
-        <HelperText persistent slot="helper">
-          Put in the annual inflation rate for your country/currency.
-        </HelperText>
+        <HelperText persistent slot="helper">Put in the annual inflation rate for your country/currency.</HelperText>
       </Textfield>
 
       <Textfield
@@ -235,9 +215,7 @@
         input$step={0.01}
         input$min="0"
       >
-        <HelperText persistent slot="helper">
-          For calculating the examples.
-        </HelperText>
+        <HelperText persistent slot="helper">For calculating the examples.</HelperText>
       </Textfield>
     {/if}
   </Card>

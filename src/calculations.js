@@ -68,29 +68,18 @@ export function calculateResults(input) {
           let instantInterest = currentCapital * (interest.percentage / 100);
           totalInterestY += instantInterest;
         }
-        if (
-          interest.type === "simple" &&
-          interest.period === "yearly-1-y" &&
-          m % 12 === 0
-        ) {
+        if (interest.type === "simple" && interest.period === "yearly-1-y" && m % 12 === 0) {
           let instantInterest = currentCapital * (interest.percentage / 100);
           totalInterestY += instantInterest;
         }
 
         // compounding interests
-        if (
-          interest.type === "compounding" &&
-          interest.period === "monthly-12-y"
-        ) {
+        if (interest.type === "compounding" && interest.period === "monthly-12-y") {
           let instantInterest = currentCapital * (interest.percentage / 100);
           totalInterestY += instantInterest;
           currentCapital += instantInterest;
         }
-        if (
-          interest.type === "compounding" &&
-          interest.period === "yearly-1-y" &&
-          m % 12 === 0
-        ) {
+        if (interest.type === "compounding" && interest.period === "yearly-1-y" && m % 12 === 0) {
           let instantInterest = currentCapital * (interest.percentage / 100);
           totalInterestY += instantInterest;
           currentCapital += instantInterest;
@@ -100,8 +89,7 @@ export function calculateResults(input) {
 
     // total tax on interest
     if (interest.enabled) {
-      totalInterestTaxY =
-        totalInterestY * (interest.taxPercentageOnInterest / 100);
+      totalInterestTaxY = totalInterestY * (interest.taxPercentageOnInterest / 100);
       // simple interest is not counted towards the recurring investments. Thereby
       // the tax on interest in not deducted from the capital.
       if (interest.type === "compounding") {
@@ -111,9 +99,7 @@ export function calculateResults(input) {
 
     // yearly wealth tax
     if (wealthTax.enabled) {
-      let base = wealthTax.excludeWealthYoungerThanOneYear
-        ? startingCapital
-        : currentCapital;
+      let base = wealthTax.excludeWealthYoungerThanOneYear ? startingCapital : currentCapital;
       totalWealthTaxY = base * (wealthTax.percentage / 100);
       currentCapital -= totalWealthTaxY;
     }
@@ -143,17 +129,9 @@ export function calculateResults(input) {
 
   // totals
   let totals = {
-    investment:
-      capitalAmount +
-      list.reduce((sum, year) => sum + Math.max(year.totalContributionY, 0), 0),
-    withdrawl: list.reduce(
-      (sum, year) => sum + Math.min(year.totalContributionY, 0),
-      0
-    ),
-    periodicContributionOrWithdrawl: list.reduce(
-      (sum, year) => sum + year.totalContributionY,
-      0
-    ),
+    investment: capitalAmount + list.reduce((sum, year) => sum + Math.max(year.totalContributionY, 0), 0),
+    withdrawl: list.reduce((sum, year) => sum + Math.min(year.totalContributionY, 0), 0),
+    periodicContributionOrWithdrawl: list.reduce((sum, year) => sum + year.totalContributionY, 0),
     interest: list.reduce((sum, year) => sum + year.totalInterestY, 0),
     inflationAdjustedTotalInterestAfterIncomeTax: list.reduce(
       (sum, year) => sum + year.inflationAdjustedTotalInterestAfterIncomeTaxY,
@@ -163,19 +141,16 @@ export function calculateResults(input) {
     wealthTax: list.reduce((sum, year) => sum + year.totalWealthTaxY, 0),
     years,
     endingCapital: list[list.length - 1].endingCapital,
-    inflationAdjustedEndingCapital:
-      list[list.length - 1].inflationAdjustedEndingCapital,
+    inflationAdjustedEndingCapital: list[list.length - 1].inflationAdjustedEndingCapital,
   };
-  totals.effectiveInflationAdjustedProfit =
-    totals.inflationAdjustedEndingCapital - totals.investment;
+  totals.effectiveInflationAdjustedProfit = totals.inflationAdjustedEndingCapital - totals.investment;
 
   // example
   if (suggestedPriceOfGoldPerGram <= 0) {
     suggestedPriceOfGoldPerGram = 0.00000001;
   }
   let example = {
-    goldPurchaseableWithStartingCapital:
-      totals.investment / suggestedPriceOfGoldPerGram,
+    goldPurchaseableWithStartingCapital: totals.investment / suggestedPriceOfGoldPerGram,
     goldPurchaseableWithInflationAdjustedEndingCapital:
       totals.inflationAdjustedEndingCapital / suggestedPriceOfGoldPerGram,
   };
