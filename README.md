@@ -32,6 +32,6 @@ We don't recommend running it directly on your development machine. Use the foll
 
 ## Author and License
 
-License: [MIT LICENSE](LICENSE)
+License: [GNU General Public License v3.0](LICENSE)
 
 2022 © [Sayem Shafayet](https://ishafayet.me)
